@@ -46,6 +46,21 @@ vector<ll> getVec(ll n) {
     return vec;
 }
 
+bool compare(pair<ll,ll> &p1, pair<ll,ll> &p2)
+{
+    if (p1.second == p2.second)
+        return p1.first < p2.first;
+    return p1.second > p2.second;
+}
+
+bool cmp(pair<ll,ll> &p1, pair<ll, ll> &p2)
+{
+    if (p1.second == p2.second)
+        return p1.first > p2.first;
+    return p1.second < p2.second;
+}
+
+
 
 int ceildiv(int n, int div){
     if (n % div == 0)
@@ -64,72 +79,28 @@ void test()
     cin >> t1;
     for (ll q1= 1; q1 <= t1; ++q1){
 
-        ll n,k;
-        cin >> n >> k;
-        vl a(n),b(n);
+        ll n,x;
+        cin >> n >> x;
 
-        fin{
-            cin >> a[i];
+        vl v;
+        ll num=0;
+        for(ll i = 0; i < n-1; i++){
+            if (i == x)
+                num++;
+            v.push_back(num);
+            num++;
         };
 
-        ll minus_counter=0;
+        if (n == x)
+            v.push_back(x-1);
+        else
+            v.push_back(x);
+
+
         fin{
-            cin >> b[i];
-            if (b[i] == -1)
-                minus_counter++;
+            cout << v[i] << " ";
         };
-
-        if (minus_counter == n){
-            ll amin = *min_element(a.begin(),a.end());
-            ll amax = *max_element(a.begin(),a.end());
-
-            ll bmax = amax-amin;
-            cout << (k-bmax+1) << nl;
-        }
-        else{
-            ll needed = -1;
-            ll flag1 = 1;
-            fin{
-                if (b[i] == -1)
-                    continue;
-
-                else{
-                    ll temp = a[i] + b[i];
-                    if (needed == -1)
-                        needed = temp;
-                    else{
-                        if (temp == needed)
-                            continue;
-                        else
-                            flag1=0;
-
-                    }
-                }
-            };
-            ll amin = *min_element(a.begin(),a.end());
-            ll bmax = needed - amin;
-
-            ll flag2;
-            if (bmax <= k)
-                flag2 = 1;
-            else
-                flag2 = 0;
-
-            ll amax = *max_element(a.begin(),a.end());
-            ll bmin = needed - amax;
-
-            if (bmin < 0 && flag2 == 1)
-                flag2 = 0;
-            cout << min(flag1,flag2) << nl;
-
-
-
-        }
-
-
-
-
-
+        cout << nl;
 
 
 
